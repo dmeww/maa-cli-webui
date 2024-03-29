@@ -1,0 +1,20 @@
+@import "scrollbar.css";
+
+html,body{
+    height: 100%;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+#app {
+    height: 100%;
+    max-width: 900px;
+    width: 100%;
+}
+
+.window{
+    height: 75vh;
+    overflow: auto;
+}
+
