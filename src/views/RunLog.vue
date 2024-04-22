@@ -1,22 +1,19 @@
 <template>
   <v-window-item :value="value" class="h-100 overflow-auto">
     <v-skeleton-loader :loading="loading" style="height: 100%;display:block;background-color:rgb(250,253,253);"
-                       type="table">
+      type="table">
       <v-container style="background-color: rgb(250,253,253)">
 
         <div class="d-flex justify-space-between" style="font-size: 130%;padding-bottom: 14px;">
           <div>
             运行日志
           </div>
-          <v-btn v-if="status" append-icon="mdi-close" color="error" variant="outlined"
-                 @click="stop_task">
-            Stop
-          </v-btn>
+          <div></div>
         </div>
 
-        <v-card variant="elevated" :title="`运行状态: ${status?`正在运行 ${name}`:'空闲中'}`"
-                style="border-radius: 12px;background-color:rgb(250,253,253);">
-          <v-divider style="padding-bottom: 15px;"/>
+        <v-card variant="elevated" :title="`运行状态: ${status ? `正在运行 ${name}` : '空闲中'}`"
+          style="border-radius: 12px;background-color:rgb(250,253,253);">
+          <v-divider style="padding-bottom: 15px;" />
           <div style="height: 100%;width: 100%;display: flex;align-items: center;justify-content: space-between;">
 
             <div style="width: 100%;padding-left: 10px;">
@@ -31,8 +28,7 @@
           <v-container style="padding-bottom: 24px;">
             <div v-if="status">
               <v-chip v-for="i in task.content.tasks" :key="i" color="primary" size="large" style="margin: 4px"
-                      variant="outlined"
-                      @click="()=>{}">
+                variant="outlined" @click="() => { }">
                 {{ chips[i.type] }}
               </v-chip>
             </div>
@@ -41,15 +37,11 @@
         </v-card>
 
         <v-card variant="elevated"
-                style="height: 100%;margin-top: 15px;padding-bottom: 15px;border-radius: 12px;background-color:rgb(250,253,253);"
-                title="运行日志">
-          <v-divider/>
+          style="height: 100%;margin-top: 15px;padding-bottom: 15px;border-radius: 12px;background-color:rgb(250,253,253);"
+          title="运行日志">
+          <v-divider />
           <v-container style="overflow: auto;padding-top: 0;">
-            <v-textarea v-model="log"
-                        auto-grow
-                        readonly
-                        rows="6"
-                        variant="plain"></v-textarea>
+            <v-textarea v-model="log" auto-grow readonly rows="6" variant="plain"></v-textarea>
           </v-container>
 
         </v-card>
@@ -57,14 +49,17 @@
 
       </v-container>
     </v-skeleton-loader>
+    <v-btn v-if="status" icon="mdi-close" size="large" color="error" @click="stop_task"
+      style="position:absolute; bottom: 24px;right: 24px">
+    </v-btn>
   </v-window-item>
 </template>
 
 <script setup>
 
-import {onMounted, ref} from "vue";
-import {notify} from "../utils/util.js";
-import {chips} from "../utils/types.js";
+import { onMounted, ref } from "vue";
+import { notify } from "../utils/util.js";
+import { chips } from "../utils/types.js";
 import Config from "../utils/config.js";
 
 defineProps({
@@ -156,6 +151,4 @@ const stop_task = () => {
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

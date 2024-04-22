@@ -3,9 +3,9 @@
   <v-btn
          class="text-none"
          color="primary"
-         size="x-large"
+         size="large"
          variant="flat">
-    选择任务
+    选择
 
     <v-dialog activator="parent" max-width="500" persistent>
 
@@ -49,6 +49,10 @@
                         label="客户端"
                         variant="solo"
                     ></v-select>
+
+                    <v-text-field v-model="switch_account"
+                              label="账号切换"
+                              variant="outlined"></v-text-field>
 
                     <v-switch
                         v-model="multi.StartUp.value.params.start_game_enabled"
@@ -172,6 +176,16 @@ const select = ref([])
 
 
 const useSan = ref(false)
+
+const switch_account = ref('')
+
+watch(switch_account, () => {
+  console.log('onchange', switch_account.value)
+  multi.value.StartUp.value.params['account_name'] = switch_account.value
+  if (!switch_account.value.length) {
+    delete multi.value.StartUp.value.params['account_name']
+  }
+})
 
 watch(useSan, () => {
   if (useSan.value) {
